@@ -1,11 +1,11 @@
-import { LayoutProps } from "./layout.props";
-import styles from "./layout.module.css";
-import cn from "classnames";
-import { Header } from "./Header/Header";
-import React, { FunctionComponent } from "react";
-import { Sidebar } from "./Sidebar/Sidebar";
-import { Footer } from "./Footer/Footer";
-import { AppContextProvider, IAppContext } from "../context/app.context";
+import { LayoutProps } from './layout.props';
+import styles from './layout.module.css';
+import cn from 'classnames';
+import { Header } from './Header/Header';
+import React, { FunctionComponent } from 'react';
+import { Sidebar } from './Sidebar/Sidebar';
+import { Footer } from './Footer/Footer';
+import { AppContextProvider, IAppContext } from '../context/app.context';
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (

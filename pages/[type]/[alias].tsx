@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import React, { useState } from 'react';
+import React from 'react';
 import { withLayout } from '../../layout/layout';
 import axios from 'axios';
 import { MenuItem } from '../../interfaces/menu.interface';
@@ -37,7 +37,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       menu.flatMap((s) => s.pages.map((p) => `/${m.route}/${p.alias}`))
     );
   }
-
   return {
     paths,
     fallback: true,
@@ -52,14 +51,12 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({
       notFound: true,
     };
   }
-
-  const firstCategoryItem = firstLevelMenu.find((m) => m.route === params.type);
+  const firstCategoryItem = firstLevelMenu.find((m) => m.route == params.type);
   if (!firstCategoryItem) {
     return {
       notFound: true,
     };
   }
-
   try {
     const { data: menu } = await axios.post<MenuItem[]>(
       process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
@@ -67,7 +64,7 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({
         firstCategory: firstCategoryItem.id,
       }
     );
-    if (menu.length === 0) {
+    if (menu.length == 0) {
       return {
         notFound: true,
       };
