@@ -1,9 +1,9 @@
-import { GetStaticProps } from "next";
-import React, { useState } from "react";
-import { Button, Htag, P, Tag, Rating } from "../components";
-import { withLayout } from "../layout/layout";
-import axios from "axios";
-import { MenuItem } from "../interfaces/menu.interface";
+import { GetStaticProps } from 'next';
+import React, { useState } from 'react';
+import { Button, Htag, P, Tag, Rating, Input } from '../components';
+import { withLayout } from '../layout/layout';
+import axios from 'axios';
+import { MenuItem } from '../interfaces/menu.interface';
 
 function Home({ menu }: HomeProps): JSX.Element {
   const [rating, setRating] = useState<number>(4);
@@ -50,6 +50,7 @@ function Home({ menu }: HomeProps): JSX.Element {
         Primary
       </Tag>
       <Rating rating={rating} isEditable setRating={setRating} />
+      <Input placeholder="test" />
     </>
   );
 }
@@ -59,7 +60,7 @@ export default withLayout(Home);
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const firstCategory = 0;
   const { data: menu } = await axios.post<MenuItem[]>(
-    process.env.NEXT_PUBLIC_DOMAIN + "/api/top-page/find",
+    process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find',
     { firstCategory }
   );
   return {
