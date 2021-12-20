@@ -5,7 +5,7 @@ import { Card } from '../Card/Card';
 import { Rating } from '../Rating/Rating';
 import { Tag } from '../Tag/Tag';
 import { Button } from '../Button/Button';
-import { priceRu } from '../../helpers/helpers';
+import { declOfNum, priceRu } from '../../helpers/helpers';
 import { Divider } from '../Divider/Divider';
 
 export const Product = ({
@@ -20,8 +20,8 @@ export const Product = ({
         <img src={process.env.NEXT_PUBLIC_DOMAIN + product.image} alt={product.title} />
       </div>
       <div className={styles.title}>{product.title}</div>
-      <div className={styles.price}>{priceRu(product.price)} {product.oldPrice && <Tag className={styles.oldPrice} color='green'>{priceRu(product.price-product.oldPrice)}</Tag>}</div>
-      <div className={styles.credit}>{priceRu(product.credit)}/<span className={styles.month}>мес</span></div>
+      <div className={styles.price}>{product.price && priceRu(product.price)} {product.oldPrice && <Tag className={styles.oldPrice} color='green'>{priceRu(product.price-product.oldPrice)}</Tag>}</div>
+      <div className={styles.credit}>{product.credit && priceRu(product.credit)}/<span className={styles.month}>мес</span></div>
       <div className={styles.rating}>
         <Rating rating={product.reviewAvg ?? product.initialRating} />
       </div>
@@ -34,7 +34,7 @@ export const Product = ({
       </div>
       <div className={styles.priceTitle}>цена</div>
       <div className={styles.creditTitle}>в кредит</div>
-      <div className={styles.rateTitle}>{product.reviewCount} отзывов</div>
+      <div className={styles.rateTitle}>{product.reviewCount} {declOfNum(product.reviewCount,['отзыв','отзыва','отзывов'])}</div>
 		<Divider className={styles.hr}/>
 		
 		<div className={styles.description}>{product.description}</div>
