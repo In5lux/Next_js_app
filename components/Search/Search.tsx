@@ -38,7 +38,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
       />
       <Button
         appearance="primary"
-        className={styles.button}
+        className={styles.buttonSearch}
         onClick={goToSearch}
       >
         <GlassIcon />

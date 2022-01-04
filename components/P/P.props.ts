@@ -1,8 +1,8 @@
-import { DetailedHTMLProps, HtmlHTMLAttributes, ReactNode } from "react";
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
 export interface PProps
   extends DetailedHTMLProps<
-    HtmlHTMLAttributes<HTMLParagraphElement>,
+    HTMLAttributes<HTMLParagraphElement>,
     HTMLParagraphElement
   > {
   size?: "small" | "medium" | "big";

@@ -1,7 +1,7 @@
-import { DetailedHTMLProps, HtmlHTMLAttributes } from 'react';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface SearchProps
   extends DetailedHTMLProps<
-    HtmlHTMLAttributes<HTMLDivElement>,
+    HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   > {}

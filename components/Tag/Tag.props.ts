@@ -1,8 +1,8 @@
-import { DetailedHTMLProps, HtmlHTMLAttributes, ReactNode } from "react";
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
 export interface TagProps
   extends DetailedHTMLProps<
-    HtmlHTMLAttributes<HTMLDivElement>,
+    HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   > {
   size?: "small" | "medium";

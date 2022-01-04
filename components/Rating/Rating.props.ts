@@ -1,8 +1,8 @@
-import { DetailedHTMLProps, HtmlHTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export interface RatingProps
   extends DetailedHTMLProps<
-    HtmlHTMLAttributes<HTMLDivElement>,
+    HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   > {
   isEditable?: boolean;
