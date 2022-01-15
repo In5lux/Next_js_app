@@ -6,6 +6,7 @@ import { TopLevelCategory } from '../../interfaces/page.interface';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { useEffect, useReducer } from 'react';
 import { sortReducer } from './sort.reducer';
+import { useScrollY } from '../../hooks/useScrollY';
 
 export const TopPageComponent = ({
   page,
