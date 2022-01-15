@@ -8,19 +8,30 @@ import { Button } from '../Button/Button';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 import { Divider } from '../Divider/Divider';
 import Image from 'next/image';
-import { useState } from 'react';
+import { ForwardedRef, forwardRef, useRef, useState } from 'react';
 import { Review } from '../Review/Review';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
+import { motion } from 'framer-motion';
 
-export const Product = ({
+export const Product = motion(forwardRef(({
   product,
   className,
   ...props
-}: ProductProps): JSX.Element => {
+}: ProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 	const [isReviesOpened, setIsReviesOpened] = useState<boolean>(false);
+
+	const reviewRef = useRef<HTMLDivElement>(null);
+
+	const scrollToReview = () =>{
+		setIsReviesOpened(true);
+		reviewRef.current?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+	};
 	
   return (
-	<>  
+	<div className={className} {...props} ref={ref}>  
     <Card className={styles.product}>
       <div className={styles.logo}>
           <Image
@@ -45,7 +56,7 @@ export const Product = ({
       </div>
       <div className={styles.priceTitle}>цена</div>
       <div className={styles.creditTitle}>в кредит</div>
-      <div className={styles.rateTitle}>{product.reviewCount} {declOfNum(product.reviewCount,['отзыв','отзыва','отзывов'])}</div>
+      <div className={styles.rateTitle}><a href='#ref' onClick={scrollToReview}>{product.reviewCount} {declOfNum(product.reviewCount,['отзыв','отзыва','отзывов'])}</a></div>
 		<Divider className={styles.hr}/>
 		
 		<div className={styles.description}>{product.description}</div>
@@ -85,7 +96,7 @@ export const Product = ({
 	<Card color='blue' className={cn(styles.reviews,{
 		[styles.opened]: isReviesOpened,
 		[styles.closed]: !isReviesOpened
-	})}>
+	})} ref={reviewRef}>
 		{product.reviews.map(r=>(
 		<div key={r._id}>
 			<Review review={r}/>
@@ -94,6 +105,6 @@ export const Product = ({
 		))}
 		<ReviewForm productId={product._id} />
 	</Card>
-	</>
+	</div>
   );
-};
+}));
