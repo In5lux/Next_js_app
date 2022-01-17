@@ -7,20 +7,20 @@ import { Rating } from '../Rating/Rating';
 import { Textarea } from '../Textarea/Textarea';
 import { Button } from '../Button/Button';
 import { useForm, Controller } from 'react-hook-form';
-import { IReviewForm,IReviewSentResponse } from './ReviewForm.interface';
+import { IReviewForm, IReviewSentResponse } from './ReviewForm.interface';
 import axios from 'axios';
 import { API } from '../../helpers/api';
 import { useState } from 'react';
 
-export const ReviewForm =  ({ productId, className, ...props }: ReviewFormProps): JSX.Element => {
-	const { register, control, handleSubmit, formState: {errors}, reset } = useForm<IReviewForm>();
+export const ReviewForm = ({ productId, isOpened, className, ...props }: ReviewFormProps): JSX.Element => {
+	const { register, control, handleSubmit, formState: { errors }, reset } = useForm<IReviewForm>();
 
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 	const [error, setError] = useState<string>();
 
 	const onSubmit = async (formData: IReviewForm) => {
 		try {
-			const {data} = await axios.post<IReviewSentResponse>(API.review.createDemo, {...formData, productId});
+			const { data } = await axios.post<IReviewSentResponse>(API.review.createDemo, { ...formData, productId });
 			if (data.message) {
 				setIsSuccess(true);
 				reset();
@@ -31,7 +31,7 @@ export const ReviewForm =  ({ productId, className, ...props }: ReviewFormProps)
 			if (e instanceof Error) {
 				setError(e.message);
 			}
-		}		
+		}
 	};
 
 	return (
@@ -39,13 +39,15 @@ export const ReviewForm =  ({ productId, className, ...props }: ReviewFormProps)
 			<div className={cn(styles.reviewForm, className)}
 				{...props}
 			>
-				<Input 
-					{...register('name', {required: {value: true, message: 'Заполните имя'}})} 
+				<Input
+					{...register('name', { required: { value: true, message: 'Заполните имя' } })}
 					error={errors.name}
-					placeholder='Имя'/>
-				<Input 
-					{...register('title', {required: {value: true, message: 'Заполните заголовок'}})}
+					tabIndex={isOpened ? 0 : -1}
+					placeholder='Имя' />
+				<Input
+					{...register('title', { required: { value: true, message: 'Заполните заголовок' } })}
 					error={errors.title}
+					tabIndex={isOpened ? 0 : -1}
 					placeholder='Заголовок отзыва'
 					className={styles.title} />
 				<div className={styles.rating}>
@@ -53,19 +55,20 @@ export const ReviewForm =  ({ productId, className, ...props }: ReviewFormProps)
 					<Controller
 						control={control}
 						name='rating'
-						rules={{required: {value: true, message: 'Укажите рейтинг'}}}
+						rules={{ required: { value: true, message: 'Укажите рейтинг' } }}
 						render={({ field }) => (
-							<Rating isEditable rating={field.value} ref={field.ref} setRating={field.onChange} error={errors.rating}/>
+							<Rating isEditable rating={field.value} ref={field.ref} setRating={field.onChange} error={errors.rating} tabIndex={isOpened ? 0 : -1} />
 						)}
 					/>
 				</div>
-				<Textarea  
-					{...register('description', {required: {value: true, message: 'Заполните описание'}})} 
+				<Textarea
+					{...register('description', { required: { value: true, message: 'Заполните описание' } })}
 					error={errors.description}
-					placeholder='Текст отзыва' 
+					tabIndex={isOpened ? 0 : -1}
+					placeholder='Текст отзыва'
 					className={styles.description} />
 				<div className={styles.submit}>
-					<Button appearance="primary">Отправить</Button>
+					<Button appearance="primary" tabIndex={isOpened ? 0 : -1}>Отправить</Button>
 					<span className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
 				</div>
 			</div>
@@ -74,11 +77,11 @@ export const ReviewForm =  ({ productId, className, ...props }: ReviewFormProps)
 				<div>
 					Спасибо, ваш отзыв будет опубликован после проверки.
 				</div>
-				<CloseIcon className={styles.close} onClick={()=> setIsSuccess(false)} />
+				<CloseIcon className={styles.close} onClick={() => setIsSuccess(false)} />
 			</div>}
 			{error && <div className={cn(styles.panel, styles.error)}>
 				Что-то пошло не так, попробуйте обновить страницу
-				<CloseIcon className={styles.close} onClick={()=> setError(undefined)} />
+				<CloseIcon className={styles.close} onClick={() => setError(undefined)} />
 			</div>}
 		</form>
 	);
