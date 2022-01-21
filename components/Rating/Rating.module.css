@@ -3,7 +3,7 @@
 }
 
 .star {
-	display: inline-block; 
+	display: inline-block;
 }
 
 .star svg {
@@ -22,8 +22,10 @@
 	position: absolute;
 	bottom: -20px;
 	left: 0;
-	color: var(--red);
+
 	white-space: nowrap;
+
+	color: var(--red);
 }
 
 .error svg {

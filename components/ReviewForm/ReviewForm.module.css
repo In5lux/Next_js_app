@@ -1,14 +1,15 @@
 .reviewForm {
+	display: grid;
+	align-items: center;
+
 	font-size: 14px;
 	line-height: 24px;
-
-	display: grid;
 	grid-template-columns: [start] auto 1fr auto [end];
 	gap: 20px 30px;
-	align-items: center;
 }
 
-.description, .submit {
+.description,
+.submit {
 	grid-column: start / end;
 }
 
@@ -23,22 +24,24 @@
 .rating {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 20px;	
+	gap: 20px;
 }
 
 .panel {
-	border-radius: 5px;
 	position: relative;
-	padding: 20px;
+
 	margin-top: 20px;
+	padding: 20px;
+
+	border-radius: 5px;
 }
 
 .success {
-	background: var(--green-light);	
+	background: var(--green-light);
 }
 
 .error {
-	background: var(--red-light);	
+	background: var(--red-light);
 }
 
 .error .close path {
@@ -53,27 +56,27 @@
 	position: absolute;
 	top: 20px;
 	right: 20px;
+
 	border: none;
 	background: none;
 }
 
-
-@media screen and (max-width:1400px) {
-	.reviewForm{	
+@media screen and (max-width: 1400px) {
+	.reviewForm {
 		grid-template-columns: [start] 1fr 1fr [end];
-	}	
+	}
 
 	.title {
 		justify-self: normal;
 	}
 
 	.rating {
-		grid-column: start / end;	
+		grid-column: start / end;
 	}
 }
 
-@media screen and (max-width:640px) {
-	.reviewForm{	
+@media screen and (max-width: 640px) {
+	.reviewForm {
 		grid-template-columns: [start] 1fr [end];
 	}
 }

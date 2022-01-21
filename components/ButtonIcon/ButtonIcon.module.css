@@ -1,20 +1,23 @@
 .button {
-	width: 40px;
-	height: 40px;
-	background: var(--primary);	
-	border-radius: 10px;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);	
 	right: 30px;
 	bottom: 30px;
-	border: none;
+
+	width: 40px;
+	height: 40px;
+
 	cursor: pointer;
+
+	border: none;
+	border-radius: 10px;
+	background: var(--primary);
+	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
 }
 
-.primary {	
+.primary {
 	background-color: var(--primary);
 }
 
-.primary svg * {	
+.primary svg * {
 	fill: var(--white);
 }
 
@@ -26,7 +29,7 @@
 	background-color: var(--white);
 }
 
-.white svg * {	
+.white svg * {
 	fill: var(--primary);
 }
 
